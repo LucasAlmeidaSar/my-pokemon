@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.css'/>    
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="pokeball.ico">
+    <title>My Pokemon !</title>
+</head>
+<body>
+
+    <div class="container">     
+        <div class="filter-container">
+            <input type="text" id="filter" class="filter" placeholder="Nome do pokemon" autofocus />
+            <div class="btnGroup">
+                <button class="btn" data-js="btnSearchPokemon"><i class="fas fa-search"></i></button>
+                <button class="btn btn-all" data-js="btnAllPokemons">Todos</button>
+            </div>
+          </div>
+
+        <ul data-js="pokemons" class="pokemons-grid">
+          
+        </ul>
+    </div>  
+
+
+
+
+
+    <div class="modal-container" data-js="modal-container">
+        
+        <div class="modal" data-js="modal">
+
+            <button class="modal-close" data-js="modal-close">x</button>
+
+            <div class="modal-side-bar"> 
+                <a class="modal-side-bar-icon" href="javascript:void(0)" target="_blank" data-js="modal-icon"></a>
+                <div class="modal-side-bar-name" data-js="pokemon-name"></div>
+
+                <button class="modal-side-bar-item" data-js="status">Status</button>
+                <button class="modal-side-bar-item" data-js="tipo">Tipo</button>
+                <button class="modal-side-bar-item" data-js="habilidades">Habilidades</button>
+                <button class="modal-side-bar-item" data-js="especie">Espécie</button>
+
+                <div class="legendary-mythical inativo" data-js="legendary-mythical-container">
+                    <p class="legend-mythic-title" data-js="legend-mythic-title"></p>
+                    <div class="legend-mythic-star" data-js="legend-mythic-star"><i class="fas fa-star"></i></div>
+                </div>
+            </div>
+
+            <div class="modal-status"  data-js="modal-status" data-modal="status">
+                
+                <div class="progress">
+                    <p>HP</p>
+                    <div class="hp-container" data-js="hpContainer">
+                        <div class="hp" data-js="hp">130</div>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <p>ATK</p>
+                    <div class="atk-container" data-js="atkContainer">
+                        <div class="atk" data-js="atk">112</div>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <p>DEF</p>
+                    <div class="def-container" data-js="defContainer">
+                        <div class="def" data-js="def">79</div>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <p>S.AT</p>
+                    <div class="sp-atk-container" data-js="spAtkContainer">
+                        <div class="sp-atk" data-js="sp-atk">132</div>
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <p>S.DF</p>
+                    <div class="sp-def-container" data-js="spDefContainer">
+                        <div class="sp-def" data-js="sp-def">100</div>
+                    </div>
+                </div>
+
+                <!-- <div class="status-item hp"> <p class="status-name">Hp:</p>                  </div>
+                <div class="status-item atk"> <p class="status-name">Ataque:</p>             </div>
+                <div class="status-item s-atk"> <p class="status-name">Ataque Especial:</p>  </div>
+                <div class="status-item def"> <p class="status-name">Defesa:</p>             </div>
+                <div class="status-item s-def"> <p class="status-name">Defesa Especial:</p>  </div>
+                <div class="status-item xp"> <p class="status-name">Experiência Base:</p>    </div> -->
+            </div>
+
+
+            <div class="modal-tipo"  data-js="modal-tipo" data-modal="tipo">
+                <h2 class="tipo-title">Tipo do Pokemon</h2>
+                <ul class="tipo-list" data-js="tipo-list-name"></ul>
+
+                <h2 class="tipo-title">Forte contra</h2>
+                <ul class="tipo-list" data-js="tipo-list-damage-to"></ul>
+
+                <h2 class="tipo-title">Fraco contra</h2>
+                <ul class="tipo-list" data-js="tipo-list-damage-from"></ul>        
+            </div>
+
+
+            <div class="modal-habilidades"  data-js="modal-habilidades" data-modal="habilidades">
+                <h2 class="habilidades-title">Habilidades</h2>
+                <ul class="habilidades-list" data-js="habilidades-list"></ul>
+            </div>
+
+
+            <div class="modal-especie"  data-js="modal-especie" data-modal="especie">
+                <ul class="especie-list" data-js="especie-list"></ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
