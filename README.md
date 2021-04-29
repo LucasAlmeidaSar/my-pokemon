@@ -1,1 +1,1 @@
-# My Pokemon !   <img src=/pokeball.ico width="50" heigth="50">
+# My Pokemon !   <img src=/pokeball.ico width="30" heigth="30">
