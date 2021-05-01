@@ -65,10 +65,18 @@ body {
     background-color: #EAB44D;  
 }
 
+.btn-filter{
+    background-color: #EFA8B0;
+}
+
+.btn-filter:hover{  background-color: #f17b89;  }
+
 .btn-all:hover{  background-color: rgb(243, 203, 59);  }
 .btn-all.inativo:hover{  background-color: rgb(243, 203, 59);  }
 
 .btn-all.inativo{  background-color: #B6C4D1  }
+
+
 
 h2 {
 	text-align: center;
@@ -225,6 +233,7 @@ h2 {
 	border-radius: 20px;
 	position: relative;
     cursor: pointer;
+    user-select: none;
 }
 
 .card.unique{    
@@ -496,6 +505,55 @@ h2 {
 }
 
 
+
+/* MODAL FILTRO */
+.modal-filter{
+    position: absolute;
+    top:10px;
+    left: calc(50% + 100px);
+    width: 300px;
+    height:55px;
+    background: #EFA8B0;
+    display:grid;
+    place-items:center;
+    border-radius: 10px;
+    color: #582d32;
+    font-weight: 550;
+    letter-spacing: 1px;
+}
+
+.modal-filter.inativo{  display: none;  }
+  
+.modal-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.elements-select{
+    margin: 0 10px;
+    padding: 5px 25px;
+    border: none;
+    border-radius: 5px;
+    color: #7a443e;
+    outline: none;
+}
+
+.btn-filter-apply{
+    padding: 5px 25px;
+    border: none ;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background: #D57B71;
+    color: #f8f8f8;
+    transition: all .3s ease;
+}
+
+.btn-filter-apply:hover{  background-color: #af655d;  }
+  
+
+
 /* Status */
 .modal-status,
 .modal-tipo,
@@ -666,52 +724,6 @@ h2 {
 .tipo-item.dark, 
 .tipo-item.ghost, 
 .tipo-item.ground{  color: white  }
-
-
-/* Accordion */
-.accordion-container{
-    list-style: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.accordion-btn {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 1rem;
-    transition: 0.4s;
-}
-
-.accordion-btn:after {
-    content: '\02795'; /* (+) */
-    font-size: .5rem;
-    color: #777;
-    float: right;
-    margin-left: 5px;
-}
-
-.accordion-btn.active:after {  content: "\2796";  } /* (-) */
-  
-.accordion-btn.active:hover, .accordion-btn:hover {  background-color: #ccc;  }
-
-.accordion-panel {
-    padding: 0 18px;
-    display: none;
-    background-color: white;
-    overflow-y: auto;
-    max-height: 300px;
-}
-
-.accordion-panel.active{  display: block;  }
-
-
 
 
 /* SEÇÃO HABILIDADES */

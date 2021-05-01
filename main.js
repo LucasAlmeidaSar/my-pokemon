@@ -35,10 +35,10 @@ const generateHTML = pokemons =>
                         <p>Hp: ${stats[0].base_stat}</p>
                     </li>
                     <li class="card-list-item">
-                        <p>Ataque: ${stats[1].base_stat}</p>
+                        <p>Attack: ${stats[1].base_stat}</p>
                     </li>
                     <li class="card-list-item">
-                        <p>Defesa: ${stats[2].base_stat}</p>
+                        <p>Defense: ${stats[2].base_stat}</p>
                     </li>
                 </ul>    
             </div>            
@@ -323,7 +323,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageToQuantity === 0) {
             const damageTo =
-             `<li class="tipo-item fire">Nenhum Tipo !</li>`
+             `<li class="tipo-item fire">No Types!</li>`
             ulDamageTo.innerHTML = damageTo
         }
 
@@ -350,7 +350,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageFromQuantity === 0) {
             const damageFrom =
-             `<li class="tipo-item fire">Nenhum Tipo !</li>`
+             `<li class="tipo-item fire">No Types!</li>`
             ulDamageFrom.innerHTML = damageFrom
         }
 
@@ -391,7 +391,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageToQuantityType1 === 0 && damageToQuantityType2 === 0) {
             const damageTo =
-             `<li class="tipo-item fire">Nenhum Tipo !</li>`
+             `<li class="tipo-item fire">No Types!</li>`
             ulDamageTo.innerHTML = damageTo
         }
 
@@ -443,7 +443,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageFromQuantityType1 === 0 && damageFromQuantityType2 === 0) {
             const damageFrom =
-             `<li class="tipo-item fire">Nenhum Tipo !</li>`
+             `<li class="tipo-item fire">No Types!</li>`
             ulDamageFrom.innerHTML = damageFrom
         }
 
@@ -515,8 +515,7 @@ const setUpHabilidadeInfo = async pokemon => {
     
     if (typeOfElement === 'string') {
         const singleAbility = await (await fetch(urlPokemonAbilities)).json()
-        const description = singleAbility.effect_entries.filter(descri => descri.language.name === 'en')
-        console.log(description)
+        const description = singleAbility.effect_entries.filter(descri => descri.language.name === 'en')        
 
         const li = 
         `<li class="habilidades-item">                      
@@ -584,26 +583,26 @@ const setUpEspecieInfo = async pokemon => {
 
     const lis = 
     `
-    <li class="especie-item"><strong>Espécie:</strong> ${especie.name}</li>
-    <li class="especie-item"><strong>Dificuldade de captura:</strong> ${especie.capture_rate}</li>
-    <li class="especie-item"><strong>Cor:</strong> ${especie.color.name}</li>
-    <li class="especie-item"><strong>Evolução 1:</strong> 
+    <li class="especie-item"><strong>Specie:</strong> ${especie.name}</li>
+    <li class="especie-item"><strong>Capture rate:</strong> ${especie.capture_rate}</li>
+    <li class="especie-item"><strong>Color:</strong> ${especie.color.name}</li>
+    <li class="especie-item"><strong>Evolution 1:</strong> 
         <a class="especie-link" data-js="especie-link" href="javascript:void(0)">
             ${evolution1}
         </a> 
     </li>
-    <li class="especie-item"><strong>Evolução 2:</strong>
+    <li class="especie-item"><strong>Evolution 2:</strong>
         <a class="especie-link" data-js="especie-link" href="javascript:void(0)">
             ${evolution2}
         </a>
     </li>
-    <li class="especie-item"><strong>Evolução 3:</strong>
+    <li class="especie-item"><strong>Evolution 3:</strong>
         <a class="especie-link" data-js="especie-link" href="javascript:void(0)">
             ${evolution3}
         </a>
     </li>
     <li class="especie-item"><strong>Habitat:</strong> ${habitat}</li>
-    <li class="especie-item"><strong>Classe:</strong> ${especie.shape.name}</li>
+    <li class="especie-item"><strong>Shape:</strong> ${especie.shape.name}</li>
     `
 
     ulEspecie.innerHTML = lis
@@ -620,6 +619,17 @@ const setUpEspecieInfo = async pokemon => {
 const inputSearch = document.querySelector('#filter')
 const btnSearch  = document.querySelector('[data-js="btnSearchPokemon"]')
 const btnAll = document.querySelector('[data-js="btnAllPokemons"]')
+const btnFilter = document.querySelector('[data-js="btnFilterPokemon"]')
+const modalFilter = document.querySelector('[data-js="modal-filter"]')
+const btnFilterApply = document.querySelector('[data-js="btn-filter-apply"]')
+
+btnFilter.addEventListener('click', () => {
+    modalFilter.classList.toggle('inativo')
+})
+
+btnFilterApply.addEventListener('click', () => {
+    modalFilter.classList.add('inativo')
+})
 
 btnAll.addEventListener('click' , () => {
     const generateLis = Promise.all(pokemonPromises)
@@ -629,6 +639,8 @@ btnAll.addEventListener('click' , () => {
     inputSearch.value = ''
     inputSearch.focus()
     btnAll.classList.remove('inativo')
+    modalFilter.classList.add('inativo')
+
 })
 
 
@@ -670,10 +682,10 @@ const generateUniqueHTML = ({name, id, stats, types}) => {
                     <p>Hp: ${stats[0].base_stat}</p>
                 </li>
                 <li class="card-list-item">
-                    <p>Ataque: ${stats[1].base_stat}</p>
+                    <p>Attack: ${stats[1].base_stat}</p>
                 </li>
                 <li class="card-list-item">
-                    <p>Defesa: ${stats[2].base_stat}</p>
+                    <p>Defense: ${stats[2].base_stat}</p>
                 </li>
             </ul>    
         </div>            
@@ -742,28 +754,122 @@ ulEspecie.addEventListener('click', event => {
 
 })
 
-// const linksEspecieEvolution = document.querySelectorAll('[data-js="especie-link"]')
 
-// linksEspecieEvolution.forEach( link => {
-//     const pokemonName = link.innerHTML.toLowerCase()
-//     link.addEventListener('click', () => {
-//         const urlPokemon = urlUniquePokemon(pokemonName)
 
-//         const getPokemon = async () => await (await fetch(urlPokemon)).json()
 
-//         const logPokemonUnique = async () => {
-//             const pokemon = await getPokemon()
-//             generateUniqueHTML(pokemon)
-//         }
-//         logPokemonUnique()
-//         inputSearch.value = ''
-//         inputSearch.focus()
-//         btnAll.classList.add('inativo')
+/* 
+================================================================================
+    Filtrar por Elemento do Pokemon
+================================================================================
+*/
 
-//         hideModal()
-//     })
-// })
+// const tiposExistentes = {
+//   steel:{
+//   name: 'steel'
+//   } ,
+//   fire: {
+//     name: "fire"
+//   },
+//   grass: {
+//     name: "grass"
+//   },
+//   electric: {
+//     name: "electric"
+//   },
+//   water: {
+//     name: "water"
+//   },
+//   ice: {
+//     name: "ice"
+//   },
+//   ground: {
+//     name: "ground"
+//   },
+//   rock: {
+//     name: "rock"
+//   },
+//   fairy: {
+//     name: "fairy"
+//   },
+//    poison: {
+//     name: "poison"
+//   },
+//    bug: {
+//     name: "bug"
+//   },
+//    dragon: {
+//     name: "dragon"
+//   },
+//  psychic: {
+//     name: "psychic"
+//   },
+//   flying: {
+//     name: "flying"
+//   },
+//   fighting: {
+//     name: "fighting"
+//   },
+//   normal: {
+//     name: "normal"
+//   },
+//   ghost: {
+//     name: "ghost"
+//   },
+//   dark: {
+//     name: "dark"
+//   }  
+// }
 
+
+
+const arrayPokemons = document.querySelector('ul').children
+
+const selectFilter = document.querySelector('.elements-select')
+
+const filtrarElemento = () => {
+    const valorInput = selectFilter.value.toLowerCase()
+    // tiposExistentes[valorInput]
+    if(valorInput !== '0'){
+        const arrayFilter = Array.from(arrayPokemons)        
+            .filter(el => el.querySelector('.card-subtitle')
+            .textContent.includes(valorInput))
+
+        return arrayFilter
+    }
+}
+
+const generateFilterHTML = pokemons =>{
+    const li = pokemons.reduce((accumulator, pokemon) => {
+        accumulator += 
+        `<li 
+                class="${pokemon.className}" 
+                data-js="card" 
+                data-id="${pokemon.dataset.id}"
+                data-name="${pokemon.dataset.name}"
+                data-type="${pokemon.dataset.type}">
+                ${pokemon.innerHTML}             
+                </li>`
+        return accumulator
+    },'')
+    return li
+}
+
+const filterByElement = () => {
+    const pokemons = filtrarElemento()  
+    const arrayLis =  generateFilterHTML(pokemons)
+    insertHTML(arrayLis)
+    btnAll.classList.add('inativo')
+    selectFilter.value = '0'
+}
+
+const btnApplyFilter = document.querySelector('.btn-filter-apply')
+
+btnApplyFilter.addEventListener('click' , () => {
+  const generateLis = Promise.all(pokemonPromises)
+                                .then(generateHTML)
+                                .then(insertHTML)
+                                .then(filterByElement)  
+})
 
 
 

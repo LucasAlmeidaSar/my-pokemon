@@ -12,10 +12,11 @@
 
     <div class="container">     
         <div class="filter-container">
-            <input type="text" id="filter" class="filter" placeholder="Nome do pokemon" autofocus />
+            <input type="text" id="filter" class="filter" placeholder="Pokemon's name or id" autofocus />
             <div class="btnGroup">
                 <button class="btn" data-js="btnSearchPokemon"><i class="fas fa-search"></i></button>
-                <button class="btn btn-all" data-js="btnAllPokemons">Todos</button>
+                <a class="btn btn-filter" data-js="btnFilterPokemon" href="javascript:void(0)"><i class="fas fa-filter"></i></a>
+                <button class="btn btn-all" data-js="btnAllPokemons">All</button>
             </div>
           </div>
 
@@ -24,7 +25,33 @@
         </ul>
     </div>  
 
-
+    <div class="modal-filter inativo" data-js="modal-filter">
+        <div class="modal-content">
+          <p class="label-select">Type:</p>
+          <select class="elements-select">
+            <option value="0">Select</option>
+            <option value="Bug">Bug</option>
+            <option value="Dark">Dark</option>
+            <option value="Dragon">Dragon</option>
+            <option value="Electric">Electric</option>
+            <option value="Fairy">Fairy</option>
+            <option value="Fighting">Fighting</option>
+            <option value="Fire">Fire</option>
+            <option value="Flying">Flying</option>
+            <option value="Ghost">Ghost</option>
+            <option value="Grass">Grass</option>
+            <option value="Ground">Ground</option>
+            <option value="Ice">Ice</option>
+            <option value="Normal">Normal</option>
+            <option value="Poison">Poison</option>
+            <option value="Psychic">Psychic</option>
+            <option value="Rock">Rock</option>
+            <option value="Steel">Steel</option>
+            <option value="Water">Water</option>
+          </select>
+          <button class="btn-filter-apply" data-js="btn-filter-apply">Apply</button>
+        </div>
+      </div>
 
 
 
@@ -39,9 +66,9 @@
                 <div class="modal-side-bar-name" data-js="pokemon-name"></div>
 
                 <button class="modal-side-bar-item" data-js="status">Status</button>
-                <button class="modal-side-bar-item" data-js="tipo">Tipo</button>
-                <button class="modal-side-bar-item" data-js="habilidades">Habilidades</button>
-                <button class="modal-side-bar-item" data-js="especie">Espécie</button>
+                <button class="modal-side-bar-item" data-js="tipo">Type</button>
+                <button class="modal-side-bar-item" data-js="habilidades">Abilities</button>
+                <button class="modal-side-bar-item" data-js="especie">Specie</button>
 
                 <div class="legendary-mythical inativo" data-js="legendary-mythical-container">
                     <p class="legend-mythic-title" data-js="legend-mythic-title"></p>
@@ -54,61 +81,55 @@
                 <div class="progress">
                     <p>HP</p>
                     <div class="hp-container" data-js="hpContainer">
-                        <div class="hp" data-js="hp">130</div>
+                        <div class="hp" data-js="hp"></div>
                     </div>
                 </div>
 
                 <div class="progress">
                     <p>ATK</p>
                     <div class="atk-container" data-js="atkContainer">
-                        <div class="atk" data-js="atk">112</div>
+                        <div class="atk" data-js="atk"></div>
                     </div>
                 </div>
 
                 <div class="progress">
                     <p>DEF</p>
                     <div class="def-container" data-js="defContainer">
-                        <div class="def" data-js="def">79</div>
+                        <div class="def" data-js="def"></div>
                     </div>
                 </div>
 
                 <div class="progress">
                     <p>S.AT</p>
                     <div class="sp-atk-container" data-js="spAtkContainer">
-                        <div class="sp-atk" data-js="sp-atk">132</div>
+                        <div class="sp-atk" data-js="sp-atk"></div>
                     </div>
                 </div>
 
                 <div class="progress">
                     <p>S.DF</p>
                     <div class="sp-def-container" data-js="spDefContainer">
-                        <div class="sp-def" data-js="sp-def">100</div>
+                        <div class="sp-def" data-js="sp-def"></div>
                     </div>
                 </div>
 
-                <!-- <div class="status-item hp"> <p class="status-name">Hp:</p>                  </div>
-                <div class="status-item atk"> <p class="status-name">Ataque:</p>             </div>
-                <div class="status-item s-atk"> <p class="status-name">Ataque Especial:</p>  </div>
-                <div class="status-item def"> <p class="status-name">Defesa:</p>             </div>
-                <div class="status-item s-def"> <p class="status-name">Defesa Especial:</p>  </div>
-                <div class="status-item xp"> <p class="status-name">Experiência Base:</p>    </div> -->
             </div>
 
 
             <div class="modal-tipo"  data-js="modal-tipo" data-modal="tipo">
-                <h2 class="tipo-title">Tipo do Pokemon</h2>
+                <h2 class="tipo-title">Pokemon's Type</h2>
                 <ul class="tipo-list" data-js="tipo-list-name"></ul>
 
-                <h2 class="tipo-title">Forte contra</h2>
+                <h2 class="tipo-title">Stronger Then</h2>
                 <ul class="tipo-list" data-js="tipo-list-damage-to"></ul>
 
-                <h2 class="tipo-title">Fraco contra</h2>
+                <h2 class="tipo-title">Weaker Then</h2>
                 <ul class="tipo-list" data-js="tipo-list-damage-from"></ul>        
             </div>
 
 
             <div class="modal-habilidades"  data-js="modal-habilidades" data-modal="habilidades">
-                <h2 class="habilidades-title">Habilidades</h2>
+                <h2 class="habilidades-title">Abilities</h2>
                 <ul class="habilidades-list" data-js="habilidades-list"></ul>
             </div>
 
