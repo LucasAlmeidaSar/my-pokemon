@@ -682,18 +682,27 @@ const urlUniquePokemon = name => `https://pokeapi.co/api/v2/pokemon/${name}`
 
 btnSearch.addEventListener('click' , () => {
     const urlPokemon = urlUniquePokemon(inputSearch.value.toLowerCase())
-
+    const notFoundContainer = document.querySelector('[data-js="pokemon-not-found"]')
+   
+    
     const getPokemon = async () => await (await fetch(urlPokemon)).json()
 
     const logPokemonUnique = async () => {
-        const pokemon = await getPokemon()
-        generateUniqueHTML(pokemon)
+        try {
+            const pokemon = await getPokemon()
+            generateUniqueHTML(pokemon)      
+            inputSearch.value = ''     
+            inputSearch.focus() 
+        } catch (error) {
+            notFoundContainer.classList.remove('inativo')
+            ulPokemons.innerHTML = ''
+        }        
     }
-    logPokemonUnique()
-    inputSearch.value = ''
-    inputSearch.focus()
+
+    logPokemonUnique()        
     btnAll.classList.add('inativo')
-    filtredType.classList.add('inativo')
+    filtredType.classList.add('inativo')  
+    
 })
 
 
@@ -836,6 +845,31 @@ btnApplyFilter.addEventListener('click' , () => {
                                 .then(insertHTML)
                                 .then(filterByElement)  
 })
+
+
+
+
+
+/* 
+================================================================================
+    Pokemon não encontrado
+================================================================================
+*/
+
+const btnCloseNotFoundMsg = document.querySelector('[data-js="not-found-close"]')
+
+const closeNotFoundMessage = () => {
+    btnCloseNotFoundMsg.addEventListener('click', () => {
+        const notFoundContainer = document.querySelector('[data-js="pokemon-not-found"]')
+
+        notFoundContainer.classList.add('inativo')
+        filterAll()
+    })
+}
+
+closeNotFoundMessage()
+
+
 
 
 
