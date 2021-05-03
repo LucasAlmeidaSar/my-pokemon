@@ -117,6 +117,28 @@ const setUpModal = (li) => {
     modalEspecie(id)
 }
 
+const generateModal = () => {
+    ulPokemons.addEventListener('click' , event => {
+        var ClickedElement = event.target
+
+        const liClicked = () => {
+            while (!ClickedElement.dataset.js) {
+                ClickedElement = ClickedElement.parentElement
+            }
+            return ClickedElement
+        }
+        const li = liClicked()
+        
+        if (li.dataset.js === 'card') {
+            showModal(li) 
+            setUpModal(li)
+        }
+
+    })
+}
+
+generateModal()
+
 
 
 /* 
@@ -373,13 +395,15 @@ const setUpTipoInfo = async pokemon => {
         }
     }
 
-
     function setUpMultipleTypes(type1, type2){
         const damageToQuantityType1 = type1.damage_relations.double_damage_to.length
         const damageFromQuantityType1 = type1.damage_relations.double_damage_from.length
 
         const damageToQuantityType2 = type2.damage_relations.double_damage_to.length
         const damageFromQuantityType2 = type2.damage_relations.double_damage_from.length
+
+        const damageToArray = []
+        const damageFromArray = []
 
        
         const typesNames =
@@ -396,48 +420,49 @@ const setUpTipoInfo = async pokemon => {
         }
 
         if(damageToQuantityType1 === 0 && damageToQuantityType2 !== 0) {
-            const damageTo = ''
-            ulDamageTo.innerHTML = damageTo
+           ulDamageTo.innerHTML = ''
         }
 
         if(damageToQuantityType1 === 1) {
-            const damageTo =
-             `<li class="tipo-item ${type1.damage_relations.double_damage_to[0].name}">
-             ${type1.damage_relations.double_damage_to[0].name}
-             </li>`
-            ulDamageTo.innerHTML = damageTo
+            let type = type1.damage_relations.double_damage_to[0].name
+            damageToArray.push(type)
         }
 
         if(damageToQuantityType1 > 1) {
-            const damageTo = type1.damage_relations.double_damage_to.reduce((accumulator, type) => {
-                accumulator += 
-                `<li class="tipo-item ${type.name}">${type.name}</li>`
-                return accumulator
-            }, '')
-
-            ulDamageTo.innerHTML = damageTo
+            // ulDamageTo.innerHTML = damageTo
+            let types = type1.damage_relations.double_damage_to.forEach(type => {
+                let name = type.name
+                damageToArray.push(name)
+            })           
         }
 
         // Damage To - Type 2
 
         if(damageToQuantityType2 === 1) {
-            const damageTo =
-             `<li class="tipo-item ${type2.damage_relations.double_damage_to[0].name}">
-             ${type2.damage_relations.double_damage_to[0].name}
-             </li>`
-            ulDamageTo.innerHTML += damageTo
+            let type = type2.damage_relations.double_damage_to[0].name
+            damageToArray.push(type)
         }
 
         if(damageToQuantityType2 > 1) {
-            const damageTo = type2.damage_relations.double_damage_to.reduce((accumulator, type) => {
-                accumulator += 
-                `<li class="tipo-item ${type.name}">${type.name}</li>`
-                return accumulator
-            }, '')
-
-            ulDamageTo.innerHTML += damageTo
+            let types = type2.damage_relations.double_damage_to.forEach(type => {
+                let name = type.name
+                damageToArray.push(name)
+            })
         }
 
+        const uniqueTypes = damageToArray.filter((type, index, array) => array.indexOf(type) === index)
+        const lis = uniqueTypes.reduce((accumulator, type) => {
+            accumulator += 
+            `<li class="tipo-item ${type}">
+                ${type}
+            </li>`
+            
+            return accumulator
+        },'')
+
+        ulDamageTo.innerHTML = lis
+
+        
 
         // Damage From - Type 1
 
@@ -453,44 +478,46 @@ const setUpTipoInfo = async pokemon => {
         }
 
         if(damageFromQuantityType1 === 1) {
-            const damageFrom =
-             `<li class="tipo-item ${type1.damage_relations.double_damage_from[0].name}">
-             ${type1.damage_relations.double_damage_from[0].name}
-             </li>`
-             ulDamageFrom.innerHTML = damageFrom
+            let type = type1.damage_relations.double_damage_from[0].name
+            damageFromArray.push(type)
         }
 
         if(damageFromQuantityType1 > 1) {
-            const damageFrom = type1.damage_relations.double_damage_from.reduce((accumulator, type) => {
-                accumulator += 
-                `<li class="tipo-item ${type.name}">${type.name}</li>`
-                return accumulator
-            }, '')
-
-            ulDamageFrom.innerHTML = damageFrom
+            let types = type1.damage_relations.double_damage_from.forEach(type => {
+                let name = type.name
+                damageFromArray.push(name)
+            })
         }
 
         // Damage To - Type 2
 
         if(damageFromQuantityType2 === 1) {
-            const damageFrom =
-             `<li class="tipo-item ${type2.damage_relations.double_damage_from[0].name}">
-             ${type2.damage_relations.double_damage_from[0].name}
-             </li>`
-            ulDamageFrom.innerHTML += damageFrom
+            let type = type2.damage_relations.double_damage_from[0].name
+            damageFromArray.push(type)
         }
 
         if(damageFromQuantityType2 > 1) {
-            const damageFrom = type2.damage_relations.double_damage_from.reduce((accumulator, type) => {
-                accumulator += 
-                `<li class="tipo-item ${type.name}">${type.name}</li>`
-                return accumulator
-            }, '')
-
-            ulDamageFrom.innerHTML += damageFrom
+            let types = type2.damage_relations.double_damage_from.forEach(type => {
+                let name = type.name
+                damageFromArray.push(name)
+            })
         }
+
+        const uniqueTypesFrom = damageFromArray.filter((type, index, array) => array.indexOf(type) === index)
+        const lisFrom = uniqueTypesFrom.reduce((accumulator, type) => {
+            accumulator += 
+            `<li class="tipo-item ${type}">
+                ${type}
+            </li>`
+            
+            return accumulator
+        },'')
+
+        ulDamageFrom.innerHTML = lisFrom
     }
+
 }
+
 
 
 
@@ -622,16 +649,11 @@ const btnAll = document.querySelector('[data-js="btnAllPokemons"]')
 const btnFilter = document.querySelector('[data-js="btnFilterPokemon"]')
 const modalFilter = document.querySelector('[data-js="modal-filter"]')
 const btnFilterApply = document.querySelector('[data-js="btn-filter-apply"]')
+const filtredType = document.querySelector('[data-js="filtred-type"]')
+const filtredTypeElement = document.querySelector('[data-js="filtred-type-element"]')
+const filtredTypeCount = document.querySelector('[data-js="filtred-type-count"]')
 
-btnFilter.addEventListener('click', () => {
-    modalFilter.classList.toggle('inativo')
-})
-
-btnFilterApply.addEventListener('click', () => {
-    modalFilter.classList.add('inativo')
-})
-
-btnAll.addEventListener('click' , () => {
+const filterAll = () => {
     const generateLis = Promise.all(pokemonPromises)
                                 .then(generateHTML)
                                 .then(insertHTML)
@@ -640,8 +662,20 @@ btnAll.addEventListener('click' , () => {
     inputSearch.focus()
     btnAll.classList.remove('inativo')
     modalFilter.classList.add('inativo')
+    filtredType.classList.add('inativo')
+    btnFilter.classList.remove('ativo')
 
+}
+
+btnFilter.addEventListener('click', () => {
+    modalFilter.classList.toggle('inativo')
 })
+
+btnFilterApply.addEventListener('click', () => {
+    modalFilter.classList.add('inativo')    
+})
+
+btnAll.addEventListener('click' , filterAll)
 
 
 const urlUniquePokemon = name => `https://pokeapi.co/api/v2/pokemon/${name}`
@@ -659,6 +693,7 @@ btnSearch.addEventListener('click' , () => {
     inputSearch.value = ''
     inputSearch.focus()
     btnAll.classList.add('inativo')
+    filtredType.classList.add('inativo')
 })
 
 
@@ -705,24 +740,6 @@ const insertUniqueHTML = li => ulPokemons.innerHTML = li
 ================================================================================
 */
 
-
-ulPokemons.addEventListener('click' , event => {
-    var ClickedElement = event.target
-
-    const liClicked = () => {
-        while (!ClickedElement.dataset.js) {
-            ClickedElement = ClickedElement.parentElement
-        }
-        return ClickedElement
-    }
-    const li = liClicked()
-    
-    if (li.dataset.js === 'card') showModal(li) 
-
-    setUpModal(li)
-})
-
-
 btnClose.addEventListener('click' , hideModal)
 
 
@@ -763,76 +780,24 @@ ulEspecie.addEventListener('click', event => {
 ================================================================================
 */
 
-// const tiposExistentes = {
-//   steel:{
-//   name: 'steel'
-//   } ,
-//   fire: {
-//     name: "fire"
-//   },
-//   grass: {
-//     name: "grass"
-//   },
-//   electric: {
-//     name: "electric"
-//   },
-//   water: {
-//     name: "water"
-//   },
-//   ice: {
-//     name: "ice"
-//   },
-//   ground: {
-//     name: "ground"
-//   },
-//   rock: {
-//     name: "rock"
-//   },
-//   fairy: {
-//     name: "fairy"
-//   },
-//    poison: {
-//     name: "poison"
-//   },
-//    bug: {
-//     name: "bug"
-//   },
-//    dragon: {
-//     name: "dragon"
-//   },
-//  psychic: {
-//     name: "psychic"
-//   },
-//   flying: {
-//     name: "flying"
-//   },
-//   fighting: {
-//     name: "fighting"
-//   },
-//   normal: {
-//     name: "normal"
-//   },
-//   ghost: {
-//     name: "ghost"
-//   },
-//   dark: {
-//     name: "dark"
-//   }  
-// }
-
-
-
 const arrayPokemons = document.querySelector('ul').children
 
 const selectFilter = document.querySelector('.elements-select')
 
 const filtrarElemento = () => {
     const valorInput = selectFilter.value.toLowerCase()
-    // tiposExistentes[valorInput]
+    
     if(valorInput !== '0'){
         const arrayFilter = Array.from(arrayPokemons)        
             .filter(el => el.querySelector('.card-subtitle')
             .textContent.includes(valorInput))
+
+        const results = arrayFilter.length
+
+        filtredType.classList.remove('inativo')
+        filtredTypeElement.innerHTML = valorInput
+
+        filtredTypeCount.innerHTML = results
 
         return arrayFilter
     }
@@ -859,6 +824,7 @@ const filterByElement = () => {
     const arrayLis =  generateFilterHTML(pokemons)
     insertHTML(arrayLis)
     btnAll.classList.add('inativo')
+    btnFilter.classList.add('ativo')
     selectFilter.value = '0'
 }
 
@@ -870,6 +836,24 @@ btnApplyFilter.addEventListener('click' , () => {
                                 .then(insertHTML)
                                 .then(filterByElement)  
 })
+
+
+
+
+/* 
+================================================================================
+    Scroll
+================================================================================
+*/
+
+const btnToTop = document.querySelector('[data-js="btn-to-top"]')
+
+onscroll = () => {
+    document.documentElement.scrollTop >= '500' ?
+        btnToTop.classList.remove('inativo') :
+        btnToTop.classList.add('inativo')    
+    
+}
 
 
 

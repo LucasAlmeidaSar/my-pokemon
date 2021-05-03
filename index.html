@@ -13,13 +13,22 @@
     <div class="container">     
         <div class="filter-container">
             <input type="text" id="filter" class="filter" placeholder="Pokemon's name or id" autofocus />
+            
             <div class="btnGroup">
                 <button class="btn" data-js="btnSearchPokemon"><i class="fas fa-search"></i></button>
                 <a class="btn btn-filter" data-js="btnFilterPokemon" href="javascript:void(0)"><i class="fas fa-filter"></i></a>
                 <button class="btn btn-all" data-js="btnAllPokemons">All</button>
             </div>
+
+            <div class="filtred-type flex inativo" data-js="filtred-type">
+                <p class="filtred-type-label">Type: </p>
+                <p class="filtred-type-element" data-js="filtred-type-element"></p>
+                <p class="filtred-type-results">Results: </p>
+                <p class="filtred-type-count" data-js="filtred-type-count"></p>
+            </div>
           </div>
 
+        <a class="btn btn-to-top inativo" data-js="btn-to-top" href="#"><i class="fas fa-arrow-up"></i></a>
         <ul data-js="pokemons" class="pokemons-grid">
           
         </ul>
