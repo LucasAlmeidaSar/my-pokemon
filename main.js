@@ -900,20 +900,20 @@ onscroll = () => {
 ================================================================================
 */
 
-// Caputrando os valores máximos de cada atributo
-const verifyMaxSpAtk = Promise.all(pokemonPromises)
-.then(pokemons => pokemons.reduce((accumulator, pokemon) => {
-    var hp = pokemon.stats[4].base_stat
-    return Math.max(accumulator, hp)
-}, 0)).then()
+// // Caputrando os valores máximos de cada atributo
+// const verifyMaxSpAtk = Promise.all(pokemonPromises)
+// .then(pokemons => pokemons.reduce((accumulator, pokemon) => {
+//     var hp = pokemon.stats[4].base_stat
+//     return Math.max(accumulator, hp)
+// }, 0)).then()
 
-//Pokemons que possuem quantidade específica de habilidades
-const verifyNoAbilityPokemon = Promise.all(pokemonPromises)
-.then(pokemon => pokemon.filter(pokemon => pokemon.abilities.length === 1))
-.then()
+// //Pokemons que possuem quantidade específica de habilidades
+// const verifyNoAbilityPokemon = Promise.all(pokemonPromises)
+// .then(pokemon => pokemon.filter(pokemon => pokemon.abilities.length === 1))
+// .then()
 
 
-//Pokemons que possuem os atributos mais fortes
-const verifyMaxHpPokemon = Promise.all(pokemonPromises)
-.then(pokemon => pokemon.filter(pokemon => pokemon.stats[0].base_stat === 255))
-.then()
+// //Pokemons que possuem os atributos mais fortes
+// const verifyMaxHpPokemon = Promise.all(pokemonPromises)
+// .then(pokemon => pokemon.filter(pokemon => pokemon.stats[0].base_stat === 255))
+// .then()
