@@ -652,6 +652,7 @@ const btnFilterApply = document.querySelector('[data-js="btn-filter-apply"]')
 const filtredType = document.querySelector('[data-js="filtred-type"]')
 const filtredTypeElement = document.querySelector('[data-js="filtred-type-element"]')
 const filtredTypeCount = document.querySelector('[data-js="filtred-type-count"]')
+const notFoundContainer = document.querySelector('[data-js="pokemon-not-found"]')
 
 const filterAll = () => {
     const generateLis = Promise.all(pokemonPromises)
@@ -664,6 +665,7 @@ const filterAll = () => {
     modalFilter.classList.add('inativo')
     filtredType.classList.add('inativo')
     btnFilter.classList.remove('ativo')
+    notFoundContainer.classList.add('inativo')
 
 }
 
@@ -681,9 +683,7 @@ btnAll.addEventListener('click' , filterAll)
 const urlUniquePokemon = name => `https://pokeapi.co/api/v2/pokemon/${name}`
 
 btnSearch.addEventListener('click' , () => {
-    const urlPokemon = urlUniquePokemon(inputSearch.value.toLowerCase())
-    const notFoundContainer = document.querySelector('[data-js="pokemon-not-found"]')
-   
+    const urlPokemon = urlUniquePokemon(inputSearch.value.toLowerCase())  
     
     const getPokemon = async () => await (await fetch(urlPokemon)).json()
 
@@ -693,6 +693,7 @@ btnSearch.addEventListener('click' , () => {
             generateUniqueHTML(pokemon)      
             inputSearch.value = ''     
             inputSearch.focus() 
+            notFoundContainer.classList.add('inativo')
         } catch (error) {
             notFoundContainer.classList.remove('inativo')
             ulPokemons.innerHTML = ''
@@ -835,6 +836,9 @@ const filterByElement = () => {
     btnAll.classList.add('inativo')
     btnFilter.classList.add('ativo')
     selectFilter.value = '0'
+    notFoundContainer.classList.add('inativo')
+    inputSearch.value = ''
+    inputSearch.focus()
 }
 
 const btnApplyFilter = document.querySelector('.btn-filter-apply')
@@ -861,8 +865,6 @@ const btnCloseNotFoundMsg = document.querySelector('[data-js="not-found-close"]'
 const closeNotFoundMessage = () => {
     btnCloseNotFoundMsg.addEventListener('click', () => {
         const notFoundContainer = document.querySelector('[data-js="pokemon-not-found"]')
-
-        notFoundContainer.classList.add('inativo')
         filterAll()
     })
 }
