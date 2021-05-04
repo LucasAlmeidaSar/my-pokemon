@@ -15,7 +15,10 @@
             <input type="text" id="filter" class="filter" placeholder="Pokemon's name or number" autofocus />
             
             <div class="btnGroup">
-                <button class="btn" data-js="btnSearchPokemon"><i class="fas fa-search"></i></button>
+                <button class="btn" data-js="btnSearchPokemon"> 
+                    <i class="search fas fa-search"></i> 
+                    <i class="spinner fas fa-spinner"></i>
+                </button>
                 <a class="btn btn-filter" data-js="btnFilterPokemon" href="javascript:void(0)"><i class="fas fa-filter"></i></a>
                 <button class="btn btn-all" data-js="btnAllPokemons">All</button>
             </div>
@@ -34,9 +37,17 @@
         </div>
 
         <a class="btn btn-to-top inativo" data-js="btn-to-top" href="#"><i class="fas fa-arrow-up"></i></a>
-        <ul data-js="pokemons" class="pokemons-grid">
-          
+
+        <div class="loader-container inativo" data-js="loader">
+            <i class="fas fa-spinner"></i>
+        </div>
+        <p class="erro-404 inativo" data-js="erro404">Ops! Não foi possível completar a ação.</p>
+ 
+
+        <ul class="pokemons-grid" data-js="pokemons" >            
+
         </ul>
+
     </div>  
 
     <div class="modal-filter inativo" data-js="modal-filter">

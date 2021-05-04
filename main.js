@@ -3,6 +3,11 @@
     Lista Geral de Pokemons
 ================================================================================
 */ 
+const loader = document.querySelector('[data-js="loader"]')
+const erro404 = document.querySelector('[data-js="erro404"]')
+
+loader.classList.remove('inativo')
+
 
 const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`
 
@@ -10,7 +15,10 @@ const generatePokemonPromises = () =>
     Array(500)
         .fill()
         .map((_, index) => fetch(getPokemonUrl(index+1))
-        .then(response => response.json()))
+        .then(response => response.json()).catch(error => {
+            loader.classList.add('inativo')
+            erro404.classList.remove('inativo')
+        }))
 
 
 const generateHTML = pokemons => 
@@ -50,6 +58,7 @@ const generateHTML = pokemons =>
 
 const insertHTML = pokemons => {
     const ul = document.querySelector('[data-js="pokemons"]')
+    loader.classList.add('inativo')
     ul.innerHTML = pokemons 
 }
 
@@ -59,7 +68,10 @@ const pokemonPromises = generatePokemonPromises()
 const generateLis = Promise.all(pokemonPromises)
                             .then(generateHTML)
                             .then(insertHTML)
-                            
+
+
+
+
 
   
 
@@ -686,9 +698,11 @@ const urlUniquePokemon = name => `https://pokeapi.co/api/v2/pokemon/${name}`
 btnSearch.addEventListener('click' , () => {
     const urlPokemon = urlUniquePokemon(inputSearch.value.toLowerCase())  
     
+    
     const getPokemon = async () => await (await fetch(urlPokemon)).json()
 
     const generateUniquePokemon = async () => {
+        btnSearch.classList.add('loading')
         try {
             const pokemon = await getPokemon()
             generateUniqueHTML(pokemon)      
@@ -699,11 +713,14 @@ btnSearch.addEventListener('click' , () => {
             notFoundContainer.classList.remove('inativo')
             ulPokemons.innerHTML = ''
         }        
+        btnSearch.classList.remove('loading')
     }
 
     generateUniquePokemon()        
     btnAll.classList.add('inativo')
-    filtredType.classList.add('inativo')  
+    filtredType.classList.add('inativo') 
+    erro404.classList.add('inativo')
+    modalFilter.classList.add('inativo')
     
 })
 
@@ -724,7 +741,7 @@ const generateUniqueHTML = ({name, id, stats, types}) => {
         <div 
             class="btn-prev-next prev-btn flex ${prevPokemon.types[0].type.name}" 
             data-id="${prev}">
-            
+
             <i class="prev-icon fas fa-arrow-circle-left"></i>
             <p class="prev-next-number">${prev} -</p> 
             <p class="prev-next-name">${prevPokemon.name}</p> 
@@ -781,7 +798,6 @@ ulPokemons.addEventListener('click' , event => {
         clickedElement = clickedElement.parentElement
     }
 
-    console.log(clickedElement.tagName);
     const generatePokemon = (newId) => {
         const urlPokemon = urlUniquePokemon(newId)
         const getPokemon = async () => await (await fetch(urlPokemon)).json()
@@ -802,6 +818,9 @@ ulPokemons.addEventListener('click' , event => {
         generateUniquePokemon()        
         btnAll.classList.add('inativo')
         filtredType.classList.add('inativo') 
+        erro404.classList.add('inativo')
+        modalFilter.classList.add('inativo')
+    
     }
 
     if(clickedElement.classList[0] === 'btn-prev-next') generatePokemon(clickedElement.dataset.id)
@@ -838,6 +857,9 @@ ulEspecie.addEventListener('click', event => {
         inputSearch.value = ''
         inputSearch.focus()
         btnAll.classList.add('inativo')
+        filtredType.classList.add('inativo')        
+        erro404.classList.add('inativo')
+        modalFilter.classList.add('inativo')
 
         hideModal()
     }

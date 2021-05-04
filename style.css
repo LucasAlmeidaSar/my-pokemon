@@ -92,6 +92,27 @@ body {
 
 .btn:hover{  background-color: #6825ee;  }
 
+.loading .search{  display: none;  }
+
+.spinner{  display: none;  }
+
+.loading .spinner{
+    display: block;
+    animation: spinnerAnimation 1.5s linear infinite ;
+}
+
+@keyframes spinnerAnimation{
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+} 
+
 .btn-to-top{
     position: fixed;
     bottom:10px;
@@ -137,7 +158,10 @@ body {
 
 .psychic.btn-prev-next{  color: white;  }
 
-.prev-next-number{  margin: 0 5px;  }
+.prev-next-number{  
+    font-weight: bold;
+    margin: 0 5px;  
+}
 
 .prev-next-name{  text-transform: capitalize;  }
 
@@ -715,7 +739,8 @@ h2 {
 }
 
 .btn-filter-apply:hover{  background-color: #af655d;  }
-  
+
+
 
 
 /* Status */
@@ -973,4 +998,29 @@ h2 {
     right: 10px;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+/* Loader */
+
+.loader-container{
+    display: grid;
+    place-items: center;
+    margin: auto;
+    font-size: 5rem;
+    color: white;    
+}
+
+.loader-container .fa-spinner{  animation: spinnerAnimation 1.5s linear infinite;  }
+
+.loader-container.inativo{  display: none;  }
+
+/* 404 */
+.erro-404.inativo{  display: none;  }
+.erro-404{  
+    display: block;  
+    text-align: center;
+    margin: auto;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white
 }
