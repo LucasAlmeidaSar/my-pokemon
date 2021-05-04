@@ -914,6 +914,11 @@ h2 {
 .tipo-item.ghost, 
 .tipo-item.ground{  color: white  }
 
+.tipo-item.no-type{
+    background-color: black;
+    color: white;
+}
+
 
 /* SEÇÃO HABILIDADES */
 .modal-habilidades{

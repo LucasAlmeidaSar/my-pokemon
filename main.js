@@ -358,7 +358,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageToQuantity === 0) {
             const damageTo =
-             `<li class="tipo-item fire">No Types!</li>`
+             `<li class="tipo-item no-type">No Types!</li>`
             ulDamageTo.innerHTML = damageTo
         }
 
@@ -385,7 +385,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageFromQuantity === 0) {
             const damageFrom =
-             `<li class="tipo-item fire">No Types!</li>`
+             `<li class="tipo-item no-type">No Types!</li>`
             ulDamageFrom.innerHTML = damageFrom
         }
 
@@ -428,7 +428,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageToQuantityType1 === 0 && damageToQuantityType2 === 0) {
             const damageTo =
-             `<li class="tipo-item fire">No Types!</li>`
+             `<li class="tipo-item no-type">No Types!</li>`
             ulDamageTo.innerHTML = damageTo
         }
 
@@ -481,7 +481,7 @@ const setUpTipoInfo = async pokemon => {
 
         if(damageFromQuantityType1 === 0 && damageFromQuantityType2 === 0) {
             const damageFrom =
-             `<li class="tipo-item fire">No Types!</li>`
+             `<li class="tipo-item no-type">No Types!</li>`
             ulDamageFrom.innerHTML = damageFrom
         }
 
