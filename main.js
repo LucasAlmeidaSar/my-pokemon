@@ -24,10 +24,11 @@ const generateHTML = pokemons =>
         data-id="${id}"
         data-name="${name}"
         data-type="${elementTypes[0]}">
+            <p class="card-number">N° ${id}</p>
             <img 
                 class="card-image"  
                 src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"/>
-            <h2 class="card-title">${name}</h2>
+            <h2 class="card-title">${name}</h2>            
             <p class="card-subtitle">${elementTypes.join(' | ')}</p>
             <div class="card-container">   
                 <ul class="card-list">
@@ -687,7 +688,7 @@ btnSearch.addEventListener('click' , () => {
     
     const getPokemon = async () => await (await fetch(urlPokemon)).json()
 
-    const logPokemonUnique = async () => {
+    const generateUniquePokemon = async () => {
         try {
             const pokemon = await getPokemon()
             generateUniqueHTML(pokemon)      
@@ -700,7 +701,7 @@ btnSearch.addEventListener('click' , () => {
         }        
     }
 
-    logPokemonUnique()        
+    generateUniquePokemon()        
     btnAll.classList.add('inativo')
     filtredType.classList.add('inativo')  
     
@@ -709,39 +710,102 @@ btnSearch.addEventListener('click' , () => {
 
 const generateUniqueHTML = ({name, id, stats, types}) => {
     const elementTypes = types.map( typeInfo => typeInfo.type.name)
-    const li = 
-    `<li 
-        class="card unique ${elementTypes[0]}" 
-        data-js="card" 
-        data-id="${id}"
-        data-name="${name}"
-        data-type="${elementTypes[0]}">
-        <img 
-            class="card-image"  
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"/>
-        <h2 class="card-title">${name}</h2>
-        <p class="card-subtitle">${elementTypes.join(' | ')}</p>
-        <div class="card-container">   
-            <ul class="card-list">
-                <li class="card-list-item">
-                    <p>Hp: ${stats[0].base_stat}</p>
-                </li>
-                <li class="card-list-item">
-                    <p>Attack: ${stats[1].base_stat}</p>
-                </li>
-                <li class="card-list-item">
-                    <p>Defense: ${stats[2].base_stat}</p>
-                </li>
-            </ul>    
-        </div>            
-    </li> `
+    var prev = id - 1
+    var next = id + 1
+    prev === 0 ? prev = 1 : prev = id - 1
+    next === 501 ? next = 500 : next = id + 1    
 
-    insertUniqueHTML(li)
+    const layoutGenerator = async () => {
+        const prevPokemon = await (await fetch(urlUniquePokemon(prev))).json()
+        const nextPokemon = await (await fetch(urlUniquePokemon(next))).json()
+
+        const li = 
+        `
+        <div 
+            class="btn-prev-next prev-btn flex ${prevPokemon.types[0].type.name}" 
+            data-id="${prev}">
+            
+            <i class="prev-icon fas fa-arrow-circle-left"></i>
+            <p class="prev-next-number">${prev} -</p> 
+            <p class="prev-next-name">${prevPokemon.name}</p> 
+        </div>
+        <li 
+            class="card unique ${elementTypes[0]}" 
+            data-js="card" 
+            data-id="${id}"
+            data-name="${name}"
+            data-type="${elementTypes[0]}">
+            <p class="card-number">N° ${id}</p>
+            <img 
+                class="card-image"  
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png"/>
+            <h2 class="card-title">${name}</h2>
+            <p class="card-subtitle">${elementTypes.join(' | ')}</p>
+            <div class="card-container">   
+                <ul class="card-list">
+                    <li class="card-list-item">
+                        <p>Hp: ${stats[0].base_stat}</p>
+                    </li>
+                    <li class="card-list-item">
+                        <p>Attack: ${stats[1].base_stat}</p>
+                    </li>
+                    <li class="card-list-item">
+                        <p>Defense: ${stats[2].base_stat}</p>
+                    </li>
+                </ul>    
+            </div>            
+        </li> 
+        <div 
+            class="btn-prev-next next-btn flex ${nextPokemon.types[0].type.name}" 
+            data-id="${next}"> 
+
+            <p class="prev-next-name">${nextPokemon.name} -</p> 
+            <p class="prev-next-number">${next}</p> 
+            <i class="next-icon fas fa-arrow-circle-right"></i>
+        </div>
+        `
+
+        insertUniqueHTML(li)
+    }   
+
+    layoutGenerator()
+    
+    
 }
 
 const insertUniqueHTML = li => ulPokemons.innerHTML = li
 
+ulPokemons.addEventListener('click' , event => {  
+    let clickedElement = event.target
+    while (clickedElement.tagName !== 'DIV') {
+        clickedElement = clickedElement.parentElement
+    }
 
+    console.log(clickedElement.tagName);
+    const generatePokemon = (newId) => {
+        const urlPokemon = urlUniquePokemon(newId)
+        const getPokemon = async () => await (await fetch(urlPokemon)).json()
+
+        const generateUniquePokemon = async () => {
+            try {
+                const pokemon = await getPokemon()
+                generateUniqueHTML(pokemon)      
+                inputSearch.value = ''     
+                inputSearch.focus() 
+                notFoundContainer.classList.add('inativo')
+            } catch (error) {
+                notFoundContainer.classList.remove('inativo')
+                ulPokemons.innerHTML = ''
+            }        
+        }
+
+        generateUniquePokemon()        
+        btnAll.classList.add('inativo')
+        filtredType.classList.add('inativo') 
+    }
+
+    if(clickedElement.classList[0] === 'btn-prev-next') generatePokemon(clickedElement.dataset.id)
+})
 
 
 /* 

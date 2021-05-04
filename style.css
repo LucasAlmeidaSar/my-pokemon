@@ -120,6 +120,42 @@ body {
 
 .btn-all.inativo{  background-color: #B6C4D1  }
 
+.btn-prev-next{
+    position: relative;
+    width: 200px;
+    height: 50px;
+    margin: auto;
+    background-color: #8E75FF;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    color: white;
+    padding: 0 10px;
+    justify-content: center;
+    user-select: none;
+}
+
+.psychic.btn-prev-next{  color: white;  }
+
+.prev-next-number{  margin: 0 5px;  }
+
+.prev-next-name{  text-transform: capitalize;  }
+
+.prev-icon,
+.next-icon{
+    font-size: 1.5rem;  
+    position: absolute;
+}
+
+.prev-icon{  
+    left: 10px;  
+    margin-right: 5px;
+}
+
+.next-icon{  
+    right: 10px;  
+    margin-left: 5px;
+}
 
 
 h2 {
@@ -142,126 +178,198 @@ h2 {
 /* CORES DOS TIPOS DE POKEMON */
 .steel,
 .steel .modal-side-bar-item:hover,
-.steel .modal-side-bar-item.ativo {
-	background-color: #f4f4f4;
+.steel .modal-side-bar-item.ativo,
+.modal.steel:hover{
+    background-color: #f4f4f4;
     color: #222;
+    transition: all .3s ease;
 }
+
+.steel:hover{  background-color: #e9e6e6;  }
 
 .fire,
 .fire .modal-side-bar-item:hover,
-.fire .modal-side-bar-item.ativo {
+.fire .modal-side-bar-item.ativo,
+.modal.fire:hover {
 	background-color: #FF6B6B;
-    color: #222;
+    color: #222;    
+    transition: all .3s ease;
 }
+
+.fire:hover{  background-color: #f84848;  }
 
 .grass,
 .grass .modal-side-bar-item:hover,
-.grass .modal-side-bar-item.ativo {
+.grass .modal-side-bar-item.ativo,
+.modal.grass:hover {
 	background-color: #3DEBB1;
     color: #222;
+    transition: all .3s ease;
 }
+
+.grass:hover{  background-color: #00e096;  }
 
 .electric,
 .electric .modal-side-bar-item:hover,
-.electric .modal-side-bar-item.ativo {
+.electric .modal-side-bar-item.ativo,
+.modal.electric:hover {
 	background-color: #fafa3e;
     color: #222;
+    transition: all .3s ease;
 }
+
+.electric:hover{  background-color: #e2e203;  }
 
 .water,
 .water .modal-side-bar-item:hover,
-.water .modal-side-bar-item.ativo {
+.water .modal-side-bar-item.ativo,
+.modal.water:hover {
 	background-color: #9CF5ED;
     color: #222;
+    transition: all .3s ease;
 }
+
+.water:hover{  background-color: #44f5e6;  }
 
 .ice,
 .ice .modal-side-bar-item:hover,
-.ice .modal-side-bar-item.ativo{
+.ice .modal-side-bar-item.ativo,
+.modal.ice:hover{
     background-color: #BEF5ED;
     color: #222;
+    transition: all .3s ease;
 }
+
+.ice:hover{  background-color: #81f1e1;  }
 
 .ground,
 .ground .modal-side-bar-item:hover,
-.ground .modal-side-bar-item.ativo {
+.ground .modal-side-bar-item.ativo,
+.modal.ground:hover {
 	background-color: #A78874;
+    transition: all .3s ease;
 }
+
+.ground:hover{  background-color: #a87e63;  }
 
 .rock,
 .rock .modal-side-bar-item:hover,
-.rock .modal-side-bar-item.ativo{
+.rock .modal-side-bar-item.ativo,
+.modal.rock:hover{
 	background-color: #C5B4D5;
     color: #222;
+    transition: all .3s ease;
 }
+
+.rock:hover{  background-color: #b590d8;  }
 
 .fairy ,
 .fairy .modal-side-bar-item:hover,
-.fairy .modal-side-bar-item.ativo{
+.fairy .modal-side-bar-item.ativo,
+.modal.fairy:hover{
 	background-color: #FFAFFB;
     color: #222;
+    transition: all .3s ease;
 }
+
+.fairy:hover{  background-color: #f56fee;  }
 
 .poison ,
 .poison .modal-side-bar-item:hover,
-.poison .modal-side-bar-item.ativo{
+.poison .modal-side-bar-item.ativo,
+.modal.poison:hover{
 	background-color: #6bc747;
     color: #222;
+    transition: all .3s ease;
 }
+
+.poison:hover{  background-color: #70e741;  }
 
 .bug ,
 .bug .modal-side-bar-item:hover,
-.bug .modal-side-bar-item.ativo{
+.bug .modal-side-bar-item.ativo,
+.modal.bug:hover{
 	background-color: #DEC9B4;
     color: #222;
+    transition: all .3s ease;
 }
+
+.bug:hover{  background-color: #ddb690;  }
 
 .dragon,
 .dragon .modal-side-bar-item:hover,
-.dragon .modal-side-bar-item.ativo {
+.dragon .modal-side-bar-item.ativo,
+.modal.dragon:hover {
 	background-color: #F6CD9C;
     color: #222;
+    transition: all .3s ease;
 }
+
+.dragon:hover{  background-color: #f1b871;  }
 
 .psychic,
 .psychic .modal-side-bar-item:hover,
-.psychic .modal-side-bar-item.ativo{
+.psychic .modal-side-bar-item.ativo,
+.modal.psychic:hover{
 	background-color: #5b0c77;
     color: black;
+    transition: all .3s ease;
 }
+
+.psychic:hover{  background-color: #6a038f;  }
 
 .flying,
 .flying .modal-side-bar-item:hover,
-.flying .modal-side-bar-item.ativo {
+.flying .modal-side-bar-item.ativo,
+.modal.flying:hover {
 	background-color: #F5F5F5;
     color: #222;
+    transition: all .3s ease;
 }
+
+.flying:hover{  background-color: #e4e2e2;  }
 
 .fighting ,
 .fighting .modal-side-bar-item:hover,
-.fighting .modal-side-bar-item.ativo{
+.fighting .modal-side-bar-item.ativo,
+.modal.fighting:hover{
 	background-color: #E6E0D4;
     color: #222;
+    transition: all .3s ease;
 }
+
+.fighting:hover{  background-color: #e6d4b1;  }
 
 .normal ,
 .normal .modal-side-bar-item:hover,
-.normal .modal-side-bar-item.ativo{
+.normal .modal-side-bar-item.ativo,
+.modal.normal:hover{
 	background-color: #F5F5F5;
     color: #222;
+    transition: all .3s ease;
 }
+
+.normal:hover{  background-color: #dfdddd;  }
 
 .ghost,
 .ghost .modal-side-bar-item:hover,
-.ghost .modal-side-bar-item.ativo {
+.ghost .modal-side-bar-item.ativo,
+.modal.ghost:hover {
 	background-color: #4C7397;
+    transition: all .3s ease;
 }
+
+.ghost:hover{  background-color: #2d6fac;  }
 
 .dark,
 .dark .modal-side-bar-item:hover,
-.dark .modal-side-bar-item.ativo {
+.dark .modal-side-bar-item.ativo,
+.modal.dark:hover {
 	background-color: #0c3a66;
+    transition: all .3s ease;
 }
+
+.dark:hover{  background-color: #03437e;  }
 
 
 
@@ -302,6 +410,15 @@ h2 {
 	animation: bounce 0.5s linear;
 }
 
+.card-number{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: .75rem;
+    font-weight: bold;
+    color: #555;
+}
+
 .card-title {
     color: #222;
 	text-transform: capitalize;
@@ -320,12 +437,15 @@ h2 {
 	z-index: 2;
 }
 
-.card-subtitle::first-letter{  text-transform: capitalize;  }
-
 .dark .card-subtitle ,
 .psychic .card-subtitle,
+.ghost .card-subtitle,
 .dark .card-title ,
-.psychic .card-title{
+.psychic .card-title,
+.ghost .card-title,
+.dark .card-number ,
+.psychic .card-number,
+.ghost .card-number{
 	color: #B6C4D1;
 }
 
