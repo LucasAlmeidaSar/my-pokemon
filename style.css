@@ -634,7 +634,7 @@ h2 {
     background-color: white;
     margin: 0 auto 5px auto;
     box-shadow: 0 0 0 2px lightgray;
-    background-image: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/150.svg");
+    background-image: url(./image-not-found.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 80%;
@@ -904,9 +904,9 @@ h2 {
     margin: 0 10px 10px 0;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0,0,0,.5);
-    cursor: pointer;
     font-size: .9rem;
     text-transform: capitalize;
+    user-select: none;
 }
 
 .tipo-item.psychic, 
